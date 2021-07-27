@@ -11,7 +11,9 @@ trainDataset = Dataset(cfgProtoc, cfgPreproc);
 % Add the data to the trainDataset class
 
 %% Classifier
-realTime = StreamingOpenBCI(128, cfgPreproc);
+secs = 2;
+
+realTime = StreamingOpenBCI(secs, 125, cfgPreproc);
 
 realTime = realTime.train(trainDataset);
-% realTime = realTime.classifyStreaming();
+% realTime = realTime.classifyStreamingSim();

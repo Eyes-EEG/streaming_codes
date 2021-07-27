@@ -2,56 +2,76 @@ classdef StreamingOpenBCI < BCI
     properties
         cfgPreproc
 
-        buffer;
         bufferSamples;
+        boardShim;
     end
 
     methods
-        function obj = StreamingOpenBCI(sampleRate, cfgPreproc)
+        function obj = StreamingOpenBCI(secs, sampleRate, cfgPreproc)
             obj = obj@BCI();
-            
-            secs = 2;
+            BoardShim.set_log_file('brainflow.log');
+            BoardShim.enable_dev_board_logger();
+
+            params = BrainFlowInputParams();
+            obj.boardShim = BoardShim(int32(BoardIDs.CYTON_DAISY_BOARD), params);
+
             obj.bufferSamples = secs * sampleRate;
-            
-            obj.buffer = [];
+
             obj.cfgPreproc = cfgPreproc;
         end
 
         function obj = classifyStreaming(obj)
-            lib = lsl_loadlib();
-
-            disp('Resolving an EEG stream...');
-            result = {};
-            while isempty(result)
-                result = lsl_resolve_byprop(lib, 'type', 'EEG');
-            end
-
-            % Create a new inlet
-            disp('Opening an inlet...');
-            inlet = lsl_inlet(result{1});
+            obj = obj.openConnection();
+            obj = obj.initBoard();
 
             while true
-                obj = obj.readStreaming(inlet);
+                data = obj.getData();
 
-                [~, numSampBuffer] = size(obj.buffer);
-                if(numSampBuffer >= obj.bufferSamples)
-                    
-                    csvwrite('.\Records\bufferOpenBCI.csv', obj.buffer);
-                    data = Dataset([], obj.cfgPreproc);
-                    data = data.addAllFile('bufferOpenBCI');
+                action = obj.classify(data);
+                obj.sendCommand(int32(action));
 
-                    obj.classifyAndSend(data);
-                    
-                    obj.buffer = obj.buffer(:, end - (obj.bufferSamples - 2) : end);
-                end
+                pause(2);
             end
+
+            obj = obj.stopBoard();
+            obj = obj.closeConnection();
         end
 
-        function obj = readStreaming(obj, inlet)
-            disp('Now receiving data...');
+         function obj = classifyStreamingSim(obj)
+            obj = obj.initBoard();
 
-            [vec, ~] = inlet.pull_sample();
-            obj.buffer = [obj.buffer, vec'];
-        end
+            while true
+                data = obj.getData();
+
+                obj = obj.openConnection();
+                action = obj.classify(data);
+                obj.sendCommand(int2str(int32(action)));
+                obj = obj.closeConnection();
+
+                pause(2);
+            end
+
+            obj = obj.stopBoard();
+         end
+
+         function obj = initBoard(obj)
+             obj.boardShim.prepare_session();
+             obj.boardShim.start_stream(45000, '');
+             pause(3);
+         end
+
+         function data = getData(obj)
+             streamingData = obj.boardShim.get_current_board_data(obj.bufferSamples);
+             streamingData = streamingData(2:17,:);
+
+             csvwrite('.\Records\bufferOpenBCI.csv', streamingData);
+             data = Dataset([], obj.cfgPreproc);
+             data = data.addAllFile('bufferOpenBCI');
+         end
+
+         function obj = stopBoard(obj)
+             obj.boardShim.stop_stream();
+             obj.boardShim.release_session();
+         end
     end
 end

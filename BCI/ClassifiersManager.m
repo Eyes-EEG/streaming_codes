@@ -1,4 +1,4 @@
-classdef (Abstract) ClassifiersManager
+classdef ClassifiersManager
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Classifier class                       %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -12,3 +12,4 @@ classdef (Abstract) ClassifiersManager
         end
     end
 end
+

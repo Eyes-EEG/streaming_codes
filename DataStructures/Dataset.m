@@ -49,7 +49,7 @@ classdef Dataset
                      
             end
             
-            function data = addAllFile(StreamingFile)
+            function data = addAllFile(obj, StreamingFile)
                         csvstream = csvread(StreamingFile);
                         
                         data = DataFilter.perform_bandpass(csvstream, 125, 15.25, 25.5, 3, int32(FilterTypes.BUTTERWORTH), 0.0);

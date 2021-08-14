@@ -1,15 +1,14 @@
+listaFicheros = {'1_close_left_eye_1.csv', '1_close_left_eye_2.csv', '1_close_left_eye_3.csv','1_close_left_eye_4.csv', '1_close_eyes_1.csv', '1_close_eyes_2.csv','1_close_eyes_3.csv', '1_close_eyes_4.csv', '1_close_right_eye_1.csv', '1_close_right_eye_2.csv', '1_close_right_eye_3.csv', '1_close_right_eye_4.csv','1_close_left_eye_1.csv', '1_close_left_eye_2.csv', '1_close_left_eye_3.csv','1_close_left_eye_4.csv'};
 
-listaFicheros = {'1_close_eyes_1.csv', '1_close_eyes_2.csv','1_close_eyes_3.csv', '1_close_eyes_4.csv', '1_close_right_eye_1.csv', '1_close_right_eye_2.csv', '1_close_right_eye_3.csv', '1_close_right_eye_4.csv','1_close_left_eye_1.csv', '1_close_left_eye_2.csv', '1_close_left_eye_3.csv','1_close_left_eye_4.csv', '1_close_eyes_1.csv', '1_close_eyes_2.csv','1_close_eyes_3.csv', '1_close_eyes_4.csv', '1_close_right_eye_1.csv', '1_close_right_eye_2.csv', '1_close_right_eye_3.csv', '1_close_right_eye_4.csv','1_close_left_eye_1.csv', '1_close_left_eye_2.csv', '1_close_left_eye_3.csv','1_close_left_eye_4.csv'};
-
-markers = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4};
+markers = {1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4};
 
 myDataset = Dataset();
 myCharacteristics = Characteristics();
 
  for i = 1 : length(markers)
-     myDataset = myDataset.addTrial(listaFicheros{i}, markers{i})   
+     myDataset = myDataset.addTrial(listaFicheros{i}, markers{i});   
  end
-Datos_filtrados = {myDataset.data_filtered(1:240).filtered_data};
+Datos_filtrados = {myDataset.data_filtered(1:160).filtered_data};
 CH1 = {};
 CH2 = {};
 CH3 = {};
@@ -45,7 +44,7 @@ for i = 1:length(Datos_filtrados)
     CH16 = [CH16,Datos_filtrados{i}(16,:)];
 end
 
-Label = [ones(1,120) (repmat (2,1,40)) (repmat (3,1,40)) (repmat (4,1,40))];
+Label = [ones(1,40) (repmat (2,1,40)) (repmat (3,1,40)) (repmat (4,1,40))];
   for i = 1 : length(CH1)
        myCharacteristics = myCharacteristics.addAlfaValue(CH1{i}, CH2{i}, CH3{i}, CH4{i}, CH5{i}, CH6{i}, CH7{i}, CH8{i}, CH9{i}, CH10{i}, CH11{i}, CH12{i}, CH13{i}, CH14{i}, CH15{i}, CH16{i}, Label(i))   
   end

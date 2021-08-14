@@ -18,7 +18,7 @@ for i = 1 : length(markers)
 %% Classifier
 secs = 2;
 
-realTime = StreamingOpenBCI(secs, 125, cfgPreproc);
+realTime = StreamingOpenBCI(secs, 125);
 
 realTime = realTime.train(trainDataset);
 % realTime = realTime.classifyStreamingSim();

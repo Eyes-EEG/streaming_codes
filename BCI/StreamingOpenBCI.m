@@ -1,6 +1,6 @@
 classdef StreamingOpenBCI < BCI
     properties
-        cfgPreproc
+        
 
         bufferSamples;
         boardShim;
@@ -17,7 +17,7 @@ classdef StreamingOpenBCI < BCI
 
             obj.bufferSamples = secs * sampleRate;
 
-            obj.cfgPreproc = cfgPreproc;
+           
         end
 
         function obj = classifyStreaming(obj)
@@ -65,8 +65,8 @@ classdef StreamingOpenBCI < BCI
              streamingData = streamingData(2:17,:);
 
              csvwrite('.\Records\bufferOpenBCI.csv', streamingData);
-             data = Dataset([], obj.cfgPreproc);
-             data = data.addAllFile('bufferOpenBCI');
+             data = Dataset();
+             data = data.addAllFile('bufferOpenBCI.csv');
          end
 
          function obj = stopBoard(obj)

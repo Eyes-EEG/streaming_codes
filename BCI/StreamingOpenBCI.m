@@ -66,7 +66,7 @@ classdef StreamingOpenBCI < BCI
 
              csvwrite('.\Records\bufferOpenBCI.csv', streamingData);
              data = Dataset();
-             data = data.addAllFile('bufferOpenBCI.csv');
+             data = data.addAllFile('bufferOpenBCI');
          end
 
          function obj = stopBoard(obj)

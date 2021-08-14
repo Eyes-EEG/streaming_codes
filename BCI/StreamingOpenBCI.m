@@ -7,7 +7,7 @@ classdef StreamingOpenBCI < BCI
     end
 
     methods
-        function obj = StreamingOpenBCI(secs, sampleRate, cfgPreproc)
+        function obj = StreamingOpenBCI(secs, sampleRate)
             obj = obj@BCI();
             BoardShim.set_log_file('brainflow.log');
             BoardShim.enable_dev_board_logger();

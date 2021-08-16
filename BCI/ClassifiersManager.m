@@ -17,7 +17,10 @@ classdef ClassifiersManager
         end
         
         function result = classify(obj, data)
-            result = obj.trainedClassifier.predictFcn(data);
+        newPredict = Features();
+        newPredict = newPredict.generateFeatures(data);
+        
+        result = obj.trainedClassifier.predictFcn(newPredict);
         end
         
     end

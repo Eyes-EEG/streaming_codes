@@ -12,7 +12,7 @@ classdef Features
         function obj = Features()
         end
         
-        function table = addAlfaValue (obj,data)
+        function featTable = generateFeatures (obj,data)
             CH1 = data (1,:);
             canal1 = obj.CalculaValorAlfa(CH1);
             obj.matriz_alfa(length(obj.matriz_alfa)+1).canal1 = canal1;

@@ -18,7 +18,7 @@ for i = 1 : length(markers)
 %% Classifier
 secs = 2;
 
-datos_filtrados = {trainDataset.data_filtered(1:160).filtered_data};
+Datos_filtrados = {trainDataset.data_filtered(1:160).filtered_data};
 
 Label = [ones(1,40) (repmat (2,1,40)) (repmat (3,1,40)) (repmat (4,1,40))];
 

@@ -34,7 +34,7 @@ classdef (Abstract) BCI
         function [obj, featTable] = generateModelFeatures(obj, Datos_filtrados, Label)
             obj.features = Features();
             for i = 1 : length(Datos_filtrados)
-                [obj.features, featTable] = obj.generateModelFeatures(Datos_filtrados{i}, Label(i));
+                [obj.features, featTable] = obj.features.generateModelFeatures(Datos_filtrados{i}, Label(i));
             end
              
         end

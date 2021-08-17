@@ -25,5 +25,7 @@ Label = [ones(1,40) (repmat (2,1,40)) (repmat (3,1,40)) (repmat (4,1,40))];
 
 realTime = StreamingOpenBCI(secs, 125);
 
-realTime = realTime.train(Datos_filtrados{i}, Label(i));
+for i = 1 : length(Datos_filtrados)
+     realTime = realTime.train(Datos_filtrados{i}, Label(i));
+end
 % realTime = realTime.classifyStreamingSim();

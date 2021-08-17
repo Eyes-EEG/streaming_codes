@@ -17,6 +17,7 @@ classdef Dataset
             for i =1:length(filtered_data)
             obj.data_filtered(length(obj.data_filtered)+1).filtered_data = filtered_data{i};
             obj.data_filtered(length(obj.data_filtered)).marker = marker;
+            end
             
          end
             

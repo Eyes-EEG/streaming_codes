@@ -40,8 +40,11 @@ classdef (Abstract) BCI
         end
 
         function action = classify(obj, data)
+            for i = 1 : length(Datos_filtrados)
+                [obj, modelfeatures] = obj.generateModelFeatures(Datos_filtrados{i}, Label(i));
+            end
             features = obj.generateFeatures(data);
-            action = obj.manager.classify(features);
+            action = obj.manager.classify(modelfeatures, features);
             disp(['Action: ' Actions.enum2str(action)]);
         end
 

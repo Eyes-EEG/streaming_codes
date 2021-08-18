@@ -16,7 +16,8 @@ classdef ClassifiersManager
             [obj.trainedClassifier, obj.accuracy] = trainClassifier(features);
         end
         
-        function result = classify(obj, features)
+        function result = classify(obj, modelfeatures, features)
+            [obj.trainedClassifier, obj.accuracy] = trainClassifier(modelfeatures);
             result = obj.trainedClassifier.predictFcn(features);
         end
         

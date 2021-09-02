@@ -16,8 +16,8 @@ classdef (Abstract) BCI
             obj.manager = ClassifierManager();
         end
 
-        function obj = train(obj, Datos_filtrados, Label)
-                [obj, features] = obj.generateModelFeatures(Datos_filtrados, Label);
+        function obj = train(obj, Datos_filtrados)
+                [obj, features] = obj.generateModelFeatures(Datos_filtrados);
                 obj.manager = obj.manager.train(features);
             
         end
@@ -29,9 +29,9 @@ classdef (Abstract) BCI
             featTable = features.generateFeatures(data);
         end
 
-        function [obj, featTable] = generateModelFeatures(obj, Datos_filtrados, Label)
+        function [obj, featTable] = generateModelFeatures(obj, Datos_filtrados)
                 obj.features = Features();
-                [obj.features, featTable] = obj.features.generateModelFeatures(Datos_filtrados, Label);
+                [obj.features, featTable] = obj.features.generateModelFeatures(Datos_filtrados);
              
         end
 

@@ -4,6 +4,7 @@ classdef Dataset
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     properties
         data_filtered;
+        streaming_data
     end
     
     methods (Access = public)
@@ -50,10 +51,10 @@ classdef Dataset
                      
             end
             
-            function data = addAllFile(obj, StreamingFile)
+            function obj = addAllFile(obj, StreamingFile)
                         csvstream = csvread(StreamingFile);
                         
-                        data = DataFilter.perform_bandpass(csvstream, 125, 15.25, 25.5, 3, int32(FilterTypes.BUTTERWORTH), 0.0);
+                        streaming_data = {DataFilter.perform_bandpass(csvstream, 125, 15.25, 25.5, 3, int32(FilterTypes.BUTTERWORTH), 0.0)};
                     
             end
 

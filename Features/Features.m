@@ -90,7 +90,7 @@ classdef Features
         end
         
         function featTable = generateFeatures (obj,data_structure)
-            data = data_structure;
+            data = data_structure{1};
             CH1 = data (1,:);
             canal1 = obj.CalculaValorAlfa(CH1);
             obj.matriz_alfa(length(obj.matriz_alfa)+1).canal1 = canal1;

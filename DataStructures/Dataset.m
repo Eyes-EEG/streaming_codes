@@ -4,7 +4,7 @@ classdef Dataset
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     properties
         data_filtered;
-        streaming_data
+        streaming_data;
     end
     
     methods (Access = public)

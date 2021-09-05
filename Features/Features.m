@@ -85,7 +85,7 @@ classdef Features
                 obj.matriz_alfa(length(obj.matriz_alfa)).Label = Label (i);
             end
             
-            table = struct2table(obj.matriz_alfa);
+            featTable = struct2table(obj.matriz_alfa);
  
         end
         
@@ -179,4 +179,5 @@ classdef Features
                     canal1 = [canal1,chanel1];
                 end
     end
+end
 end

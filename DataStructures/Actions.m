@@ -2,8 +2,9 @@ classdef Actions < ClassifyList
    enumeration
       OpenEyes(1)
       CloseEyes(2)
-      LeftEye(3)
-      RightEye(4)
+
+      RightEye(3)
+      LeftEye(4)
    end
 
    methods (Static)

@@ -10,9 +10,9 @@ classdef Actions < ClassifyList
    methods (Static)
        function result = enum2str(value)
            switch(value)
-               case Actions.Left
+               case Actions.LeftEye
                    result = 'Left Eye  ';
-               case Actions.Right
+               case Actions.RightEye
                    result = 'Right Eye ';
                case Actions.OpenEyes
                    result = 'Open Eyes ';

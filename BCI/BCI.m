@@ -13,7 +13,7 @@ classdef (Abstract) BCI
 %             obj.extConnection = ...
 %                 Connection('0.0.0.0', 3377, 'Server');
 
-            obj.manager = ClassifierManager();
+            obj.manager = ClassifiersManager();
         end
 
         function obj = train(obj, Datos_filtrados)
